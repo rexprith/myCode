@@ -1,3 +1,6 @@
+//Author: Prithwiraj Shome
+//This is an example code to showcase usage of Posix Threads
+//
 #include <iostream>
 #include <pthread.h>
 #include <sys/types.h>
