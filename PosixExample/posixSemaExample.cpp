@@ -96,6 +96,8 @@ void *Thread1_Routine(void *arg)
 	if (retv >= 0) {	
    	
 	    cout << __TIME__ << " Thread ID: "<< tid << " Execution Count = " << cnt-- << endl;
+	    sem_getvalue(&Sem, &val);
+	    cout << "Thread " << tid << ": Sem Val = "<< val << endl;
             sleep(1);
     	    sem_post(&Sem);
 	}
@@ -121,6 +123,8 @@ void *Thread2_Routine(void *arg)
 	retv = sem_wait(&Sem);
 	if (retv >= 0) {
 	    cout << __TIME__ << " Thread ID: "<< tid << " Execution Count = " << cnt-- << endl;
+	    sem_getvalue(&Sem, &val);
+	    cout << "Thread " << tid << ": Sem Val = "<< val << endl;
 	    sleep(1);
 	    sem_post(&Sem);
 	}
