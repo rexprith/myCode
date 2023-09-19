@@ -6,6 +6,7 @@ OBJ = ./obj
 
 all: directories posixThreadExample posixMqueueExample posixSemaExample
 
+
 .PHONY = directories
 
 directories:
@@ -24,6 +25,7 @@ posixSemaExample: posixSemaExample.cpp
 	@echo "Building PosixSemaExample...."
 	@$(CC) $(CFLAGS) $(LFLAGS) posixSemaExample.cpp -o $(OUTDIR)/posixSemaExample
 
+.PHONY = clean
 clean:
 
 	@echo "Deleting binaries...."
