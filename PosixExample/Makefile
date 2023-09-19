@@ -10,21 +10,23 @@ all: directories posixThreadExample posixMqueueExample posixSemaExample
 
 directories:
 	@echo "creating bin directory for binary files"
-	mkdir -p $(OUTDIR)
+	@mkdir -p $(OUTDIR)
 
 posixThreadExample: posixThreadExample.cpp
 	@echo "Building PosixThreadExample...."
-	$(CC) $(CFLAGS) $(LFLAGS) posixThreadExample.cpp $(LFLAGS) -o $(OUTDIR)/posixThreadExample
+	@$(CC) $(CFLAGS) $(LFLAGS) posixThreadExample.cpp $(LFLAGS) -o $(OUTDIR)/posixThreadExample
 
 posixMqueueExample: posixMqueueExample.cpp
 	@echo "Building PosixMqueueExample...."
-	$(CC) $(CFLAGS) $(LFLAGS) posixMqueueExample.cpp $(LFLAGS) -o $(OUTDIR)/posixMqueueExample
+	@$(CC) $(CFLAGS) $(LFLAGS) posixMqueueExample.cpp $(LFLAGS) -o $(OUTDIR)/posixMqueueExample
 
 posixSemaExample: posixSemaExample.cpp
 	@echo "Building PosixSemaExample...."
-	$(CC) $(CFLAGS) $(LFLAGS) posixSemaExample.cpp -o $(OUTDIR)/posixSemaExample
+	@$(CC) $(CFLAGS) $(LFLAGS) posixSemaExample.cpp -o $(OUTDIR)/posixSemaExample
 
 clean:
-	rm -rf $(OUTDIR)/*
-	rm -rf $(OBJ)/*
-	rmdir $(OUTDIR)
+
+	@echo "Deleting binaries...."
+	@rm -rf $(OUTDIR)/*
+	@rm -rf $(OBJ)/*
+	@rmdir $(OUTDIR)
