@@ -75,6 +75,8 @@ int main (void)
             	pthread_join(ptrCls->threadID[0],NULL);
 	    }
 	}
+	sem_close(&Sem);
+	sem_unlink(SEM_NAME);
     	delete ptrCls;
     }
     return ret;
