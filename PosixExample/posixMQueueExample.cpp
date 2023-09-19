@@ -28,10 +28,11 @@ class PosixThreadClass
 {
 	private:
 	int count;
-       	pthread_t threadID[NUM_THREADS];
 	void *(*func_table[NUM_THREADS])(void *) = {Sender_Thread_Routine,Receiver_Thread_Routine};
 	
 	public:
+       	pthread_t threadID[NUM_THREADS];
+	
 	PosixThreadClass()
 	{
 	    cout << "Class Constructor" << endl;
@@ -52,7 +53,6 @@ class PosixThreadClass
 	    {
 	    	cout << "Thread Number = " << n << endl;
 		ret = pthread_create(&threadID[n], NULL, func_table[n],&count);
-	        pthread_join(threadID[n],NULL);
 	    }
 	    return ret;
 	}
@@ -62,23 +62,33 @@ class PosixThreadClass
 int main (void)
 {
     int ret = 0;
+    int cnt = 0;
+
     mqd_t mq;
-    
     struct mq_attr mq_attr;
     mq_attr.mq_flags = 0; 
     mq_attr.mq_maxmsg = MAX_MESSAGES;
     mq_attr.mq_msgsize = MAX_MSG_SIZE;
     mq_attr.mq_curmsgs = 0;
+    
 
-    mq = mq_open(QUEUE_NAME, O_CREAT | O_EXCL, QUEUE_PERMISSIONS ,&mq_attr);
+    mq = mq_open(QUEUE_NAME, O_CREAT, QUEUE_PERMISSIONS ,&mq_attr);
     if (mq != -1)
     {
         PosixThreadClass *ptrCls = new PosixThreadClass;
         ret = ptrCls->ThreadCreator();
+	if (ret != -1) {
+	    for (cnt = 0; cnt < NUM_THREADS; cnt++) {
+	        pthread_join(ptrCls->threadID[cnt],NULL);
+	    }
+	}
         delete ptrCls;
     
     	mq_close(mq);
     	mq_unlink(QUEUE_NAME);
+    }
+    else {
+	cout << "Message Queue creation failed" << endl;	    
     }
     return ret;
 }

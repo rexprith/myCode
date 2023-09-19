@@ -63,15 +63,18 @@ class PosixThreadClass
 int main (void)
 {
     int ret = 0;
+    int cnt = 0;
+
     ret = sem_init(&Sem, 0, NUM_THREADS);
     
     if (ret != -1) {
     	PosixThreadClass *ptrCls = new PosixThreadClass;
-
     	ret = ptrCls->ThreadCreator();
-
-	pthread_join(ptrCls->threadID[0],NULL);
-	pthread_join(ptrCls->threadID[1],NULL);
+        if (ret != -1) {
+	    for (cnt = 0; cnt < NUM_THREADS; cnt++) {
+            	pthread_join(ptrCls->threadID[0],NULL);
+	    }
+	}
     	delete ptrCls;
     }
     return ret;

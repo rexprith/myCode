@@ -17,14 +17,14 @@ class PosixThreadClass
 {
 	private:
 	int count;
-       	pthread_t threadID[NUM_THREADS];
 	void *(*func_table[NUM_THREADS])(void *);
 	
 	public:
+       	pthread_t threadID[NUM_THREADS];
 	PosixThreadClass()
 	{
 	    cout << "Class Constructor" << endl;
-	    count = 5;
+	    count = 1;
 	    for (int c = 0; c < NUM_THREADS; c++){
 	    	func_table[c] = Thread_Routine;
 	    }
@@ -44,7 +44,6 @@ class PosixThreadClass
 	    {
 	    	cout << "Thread Number = " << n << endl;
 		ret = pthread_create(&threadID[n], NULL, func_table[n],&count);
-	        pthread_join(threadID[n],NULL);
 	    }
 	    return ret;
 	}
@@ -54,11 +53,15 @@ class PosixThreadClass
 int main (void)
 {
     int ret = 0;
+    int cnt = 0;
     PosixThreadClass *ptrCls = new PosixThreadClass;
+    ret = ptrCls->ThreadCreator();
     if (ret != -1) {
-        ret = ptrCls->ThreadCreator();
-        delete ptrCls;
+	for (cnt = 0; cnt < NUM_THREADS; cnt++) {
+	    pthread_join(ptrCls->threadID[cnt],NULL);
+	}
     }
+    delete ptrCls;
     return 0;
 }
 
