@@ -55,8 +55,10 @@ int main (void)
 {
     int ret = 0;
     PosixThreadClass *ptrCls = new PosixThreadClass;
-    ret = ptrCls->ThreadCreator();
-    delete ptrCls;
+    if (ret != -1) {
+        ret = ptrCls->ThreadCreator();
+        delete ptrCls;
+    }
     return 0;
 }
 

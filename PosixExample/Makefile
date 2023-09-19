@@ -1,21 +1,30 @@
 CC = g++
 CFLAGS = -Wall -g
 LFLAGS = -lpthread -lrt
-OURDIR = ./BIN
-all: posixThreadExample posixMqueueExample posixSemaExample
+OUTDIR = ./bin
+OBJ = ./obj
+
+all: directories posixThreadExample posixMqueueExample posixSemaExample
 
 .PHONY = directories
 
 directories:
+	@echo "creating bin directory for binary files"
 	mkdir -p $(OUTDIR)
-posixThreadExample:
-	$(CC) $(CFLAGS) posixThreadExample.cpp $(LFLAGS) -o $(OUTDIR)/posixThreadExample
 
-posixMqueueExample:
-	$(CC) $(CFLAGS) posixMqueueExample.cpp $(LFLAGS) -o $(OUTDIR)/posixMqueueExample
+posixThreadExample: posixThreadExample.cpp
+	@echo "Building PosixThreadExample...."
+	$(CC) $(CFLAGS) $(LFLAGS) posixThreadExample.cpp $(LFLAGS) -o $(OUTDIR)/posixThreadExample
 
-posixSemaExample:
-	$(CC) $(CFLAGS) posixSemaExample.cpp $(LFLAGS) -o $(OUTDIR)/posixSemaExample
+posixMqueueExample: posixMqueueExample.cpp
+	@echo "Building PosixMqueueExample...."
+	$(CC) $(CFLAGS) $(LFLAGS) posixMqueueExample.cpp $(LFLAGS) -o $(OUTDIR)/posixMqueueExample
+
+posixSemaExample: posixSemaExample.cpp
+	@echo "Building PosixSemaExample...."
+	$(CC) $(CFLAGS) $(LFLAGS) posixSemaExample.cpp -o $(OUTDIR)/posixSemaExample
 
 clean:
-	rm -rf $(OUTDIR)\*
+	rm -rf $(OUTDIR)/*
+	rm -rf $(OBJ)/*
+	rmdir $(OUTDIR)
