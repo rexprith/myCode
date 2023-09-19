@@ -63,7 +63,7 @@ class PosixThreadClass
 int main (void)
 {
     int ret = 0;
-    ret = sem_init(&Sem, 0, 0);//NUM_THREADS);
+    ret = sem_init(&Sem, 0, NUM_THREADS);
     
     if (ret != -1) {
     	PosixThreadClass *ptrCls = new PosixThreadClass;
