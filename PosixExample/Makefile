@@ -15,15 +15,15 @@ directories:
 
 posixThreadExample: posixThreadExample.cpp
 	@echo "Building PosixThreadExample...."
-	@$(CC) $(CFLAGS) $(LFLAGS) posixThreadExample.cpp $(LFLAGS) -o $(OUTDIR)/posixThreadExample
+	@$(CC) $(CFLAGS) posixThreadExample.cpp $(LFLAGS) -o $(OUTDIR)/posixThreadExample
 
 posixMqueueExample: posixMqueueExample.cpp
 	@echo "Building PosixMqueueExample...."
-	@$(CC) $(CFLAGS) $(LFLAGS) posixMqueueExample.cpp $(LFLAGS) -o $(OUTDIR)/posixMqueueExample
+	@$(CC) $(CFLAGS) posixMqueueExample.cpp $(LFLAGS) -o $(OUTDIR)/posixMqueueExample
 
 posixSemaExample: posixSemaExample.cpp
 	@echo "Building PosixSemaExample...."
-	@$(CC) $(CFLAGS) $(LFLAGS) posixSemaExample.cpp -o $(OUTDIR)/posixSemaExample
+	@$(CC) $(CFLAGS) posixSemaExample.cpp $(LFLAGS) -o $(OUTDIR)/posixSemaExample
 
 .PHONY = clean
 clean:
