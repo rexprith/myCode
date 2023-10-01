@@ -3,7 +3,7 @@ CFLAGS  = -Wall -g -Wdelete-non-virtual-dtor
 LDFLAGS = 
 OUTDIR  = bin
 
-all: directories constructor_destructor vfunc pureVfunc abstractClass search2Sum
+all: directories constructor_destructor vfunc pureVfunc abstractClass search2Sum bubbleSort
 
 .PHONY: directories
 
@@ -30,6 +30,9 @@ search2Sum: search2Sum.cpp
 abstractClass: abstractClass.cpp
 	@echo "Building abstractClass.cpp....."
 	@$(CC) $(CFLAGS) abstractClass.cpp -o $(OUTDIR)/abstractClass
+bubbleSort: bubbleSort.cpp
+	@echo "Building bubbleSort.cpp....."
+	@$(CC) $(CFLAGS) bubbleSort.cpp -o $(OUTDIR)/bubbleSort
 
 	
 .PHONY: clean
