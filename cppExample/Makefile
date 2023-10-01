@@ -3,7 +3,7 @@ CFLAGS  = -Wall -g -Wdelete-non-virtual-dtor
 LDFLAGS = 
 OUTDIR  = bin
 
-all: directories constructor_destructor vfunc pureVfunc
+all: directories constructor_destructor vfunc pureVfunc abstractClass
 
 .PHONY: directories
 
@@ -23,6 +23,9 @@ vfunc: vfunc.cpp
 	@echo "Building vfunc.cpp....."
 	@$(CC) $(CFLAGS) vfunc.cpp -o $(OUTDIR)/vfunc
 
+abstarctClass: abstarctClass.cpp
+	@echo "Building abstarctClass.cpp....."
+	@$(CC) $(CFLAGS) abstractClass.cpp -o $(OUTDIR)/abstractClass
 
 .PHONY: clean
 clean:
