@@ -19,21 +19,23 @@ int main()
 	}
 	
 	//Bubble sort
-	for (int i = 0; i < numTotal; i++)
+	for (int i = 0; i < numTotal-1; i++)
 	{
-		if (arr[i] > arr[i+1])
-		{
-			if ((i + 1) < numTotal) {
-				temp = arr[i];
-				arr[i] = arr[i + 1];
-				arr[i + 1] = temp;
+		for (int cnt = 0; cnt < (numTotal - i-1); cnt++) {
+			if (arr[cnt] > arr[cnt + 1])
+			{
+					temp = arr[cnt];
+					arr[cnt] = arr[cnt + 1];
+					arr[cnt + 1] = temp;
 			}
-		}	
+		}
 	}
 
 	cout << "Sorted elements are:" << endl;
 	for (int i = 0; i < numTotal; i++)
 		cout << arr[i] << endl;
+
+	free(arr);
 
 	return 0;
 }
